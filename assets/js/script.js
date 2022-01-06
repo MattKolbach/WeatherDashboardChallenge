@@ -1,16 +1,56 @@
-const APIKey = "842c3948b50987469451e4a23adc7e2e";
-let city;
-//current weather next (city and api key only)
-let queryURL = "http://api.openweathermap.org/data/2.5/weather?=" + city + "&appid=" + APIKey;
+const apiKey = "842c3948b50987469451e4a23adc7e2e";
+let cityName;
+//let city = "milwaukee"; //for testing purposes only
+const citySearchButton = document.querySelector("#userCityButton");
+const cityNameEl = document.querySelector("#userCityInput");
+////////////////////////////////////global variables above///////////////////////////////////////////////
+
+////////this captures the city name when the search button is clicked////////
+var citySearchHandler = function (event) {
+  // prevent page from refreshing
+  event.preventDefault();
+  console.log("the button has been clicked");
+  // get value from input element
+  cityName = cityNameEl.value.trim();
+  console.log("the city searched was " + cityName);
+  //clear old content from input on screen
+  cityNameEl.value = "";
+};
 
 
-fetch(queryURL)
+
+let getCurrentWeather = function (cityName) {
+  let currentWeatherApiUrl =
+  "http://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&units=imperial" + "&appid=" + apiKey;
+
+  fetch(currentWeatherApiUrl).then(function (response) {
+    if (response.ok) {
+      console.log(response);
+      response.json().then(function (data) {
+        console.log(data);
+      });
+    }
+  });
+};
+
+
+//capture city from input
+///pass city into url
+//get data
+//pick stuff out of array that I need
 
 
 
 
+let testQueryURL =
+  "http://api.openweathermap.org/data/2.5/weather?q=" + "milwaukee" + "&units=imperial" + "&appid=" + apiKey;
+console.log(testQueryURL);
 
+//////////////////////////////////////////////////////////////////////////////////////////
+// add event listeners to forms
+citySearchButton.addEventListener("click", citySearchHandler);
 
+//////////////////////////////////////////////////////////////////////////////////////////
 /*GIVEN a weather dashboard with form inputs
 WHEN I search for a city
 THEN I am presented with current and future conditions for that city and that city is added to the search history
