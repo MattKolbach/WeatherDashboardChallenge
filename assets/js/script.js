@@ -4,6 +4,7 @@ let cityName;
 const citySearchButton = document.querySelector("#userCityButton");
 const cityNameEl = document.querySelector("#userCityInput");
 let citySearchHistory = [];
+const cityHistoryColumnEl = document.querySelector("#cityHistory");
 ////////////////////////////////////global variables above///////////////////////////////////////////////
 
 ////////this captures the city name when the search button is clicked////////
@@ -22,25 +23,36 @@ var citySearchHandler = function (event) {
   console.log(citySearchHistory);
 
   saveCity();
-  //loadCity();
+  loadCity();
+
+  ///create button for historical city///
+  let citySearchHistoryEl = document.createElement("button");
+  //add type
+  citySearchHistoryEl.type = "button";
+  //give it a class name
+  citySearchHistoryEl.className = "btn btn-secondary";
+  citySearchHistoryEl.innerText = cityName;
+  cityHistoryColumnEl.appendChild(citySearchHistoryEl);
 };
 
- /////saving city name to local storage/////
-let saveCity = function() {
+/////saving city name to local storage/////
+let saveCity = function () {
   localStorage.setItem("cityHistory", JSON.stringify(cityName));
-}
+};
 
 /////load saved cities name to page(history button)/////
-let loadCity = function() {
-  let loadedCityName = localStorage.getItem(cityHistory);
+let loadCity = function () {
+  let loadedCityName = localStorage.getItem("cityHistory");
   console.log(loadedCityName);
-}
-
-
+};
 
 let getCurrentWeather = function (cityName) {
   let currentWeatherApiUrl =
-  "http://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&units=imperial" + "&appid=" + apiKey;
+    "http://api.openweathermap.org/data/2.5/weather?q=" +
+    cityName +
+    "&units=imperial" +
+    "&appid=" +
+    apiKey;
 
   fetch(currentWeatherApiUrl).then(function (response) {
     if (response.ok) {
@@ -52,14 +64,12 @@ let getCurrentWeather = function (cityName) {
   });
 };
 
-
-
-
-
-
-
 let testQueryURL =
-  "http://api.openweathermap.org/data/2.5/weather?q=" + "milwaukee" + "&units=imperial" + "&appid=" + apiKey;
+  "http://api.openweathermap.org/data/2.5/weather?q=" +
+  "milwaukee" +
+  "&units=imperial" +
+  "&appid=" +
+  apiKey;
 console.log(testQueryURL);
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -78,8 +88,6 @@ WHEN I view future weather conditions for that city
 THEN I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, the wind speed, and the humidity
 WHEN I click on a city in the search history
 THEN I am again presented with current and future conditions for that city*/
-
-
 
 //capture city from input
 ///pass city into url
