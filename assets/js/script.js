@@ -31,6 +31,7 @@ var citySearchHandler = function (event) {
   citySearchHistoryEl.type = "button";
   //give it a class name
   citySearchHistoryEl.className = "btn btn-secondary";
+  //set text onto button created
   citySearchHistoryEl.innerText = cityName;
   cityHistoryColumnEl.appendChild(citySearchHistoryEl);
 };
@@ -46,24 +47,28 @@ let loadCity = function () {
   console.log(loadedCityName);
 };
 
-let getCurrentWeather = function (cityName) {
+
+//////////     API call start     //////////
+let getCurrentWeatherHandler = function (event) {
   let currentWeatherApiUrl =
     "http://api.openweathermap.org/data/2.5/weather?q=" +
     cityName +
     "&units=imperial" +
     "&appid=" +
     apiKey;
-
-  fetch(currentWeatherApiUrl).then(function (response) {
+  console.log(currentWeatherApiUrl);
+  /*fetch(currentWeatherApiUrl).then(function (response) {
     if (response.ok) {
       console.log(response);
       response.json().then(function (data) {
         console.log(data);
       });
     }
-  });
+  });*/
 };
 
+
+/*
 let testQueryURL =
   "http://api.openweathermap.org/data/2.5/weather?q=" +
   "milwaukee" +
@@ -71,11 +76,12 @@ let testQueryURL =
   "&appid=" +
   apiKey;
 console.log(testQueryURL);
+*/
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // add event listeners
 citySearchButton.addEventListener("click", citySearchHandler);
-
+citySearchButton.addEventListener("click", getCurrentWeatherHandler);
 //////////////////////////////////////////////////////////////////////////////////////////
 /*GIVEN a weather dashboard with form inputs
 WHEN I search for a city
