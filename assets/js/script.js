@@ -1,10 +1,10 @@
 const apiKey = "842c3948b50987469451e4a23adc7e2e";
 let cityName;
-//let city = "milwaukee"; //for testing purposes only
 const citySearchButton = document.querySelector("#userCityButton");
 const cityNameEl = document.querySelector("#userCityInput");
 let citySearchHistory = [];
 const cityHistoryColumnEl = document.querySelector("#cityHistory");
+const currentCityweatherEl = document.getElementById("currentCityweather");
 ////////////////////////////////////global variables above///////////////////////////////////////////////
 
 ////////this captures the city name when the search button is clicked////////
@@ -36,17 +36,15 @@ var citySearchHandler = function (event) {
   cityHistoryColumnEl.appendChild(citySearchHistoryEl);
 };
 
-/////saving city name to local storage/////
+/////     saving city name to local storage    /////
 let saveCity = function () {
   localStorage.setItem("cityHistory", JSON.stringify(cityName));
 };
 
-/////load saved cities name to page(history button)/////
+/////    load saved cities name to page(history button)    /////
 let loadCity = function () {
   let loadedCityName = localStorage.getItem("cityHistory");
-  console.log(loadedCityName);
 };
-
 
 //////////     API call start     //////////
 let getCurrentWeatherHandler = function (event) {
@@ -57,16 +55,29 @@ let getCurrentWeatherHandler = function (event) {
     "&appid=" +
     apiKey;
   console.log(currentWeatherApiUrl);
-  /*fetch(currentWeatherApiUrl).then(function (response) {
+  fetch(currentWeatherApiUrl)
+  .then(function (response) {
     if (response.ok) {
       console.log(response);
       response.json().then(function (data) {
         console.log(data);
+        const currentCity = document.createElement("h2");//creating tag for current city
+        const currentCityTemp = document.createElement("p");
+        const currentCityHumidity = document.createElement("p");
+        const currentCityWind = document.createElement("p");
+        const currentCityUVIndex = document.createElement("p");
+        
+        currentCity.textContent = data.name; //grab the name from the data
+        currentCityTemp.textContent = `Temp: ${data.main.temp} °F`;
+        currentCityHumidity.textContent = `Humidity: ${data.main.humidity} %`;
+        currentCityWind.textContent = `Wind: ${data.wind.speed} MPH`;
+        currentCityUVIndex.textContent = `UV Index: `
+
+        currentCityweatherEl.append(currentCity, currentCityTemp, currentCityHumidity, currentCityWind);
       });
     }
-  });*/
+  });
 };
-
 
 /*
 let testQueryURL =
