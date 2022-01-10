@@ -13,10 +13,14 @@ const fiveDayEl = document.querySelector("#fiveDay");
 
 //////////     first API call     //////////
 const getCurrentWeatherHandler = function (event) {
+  currentCityweatherEl.innerHTML = "";
   const cityName = cityNameEl.value.trim();
   //clear old content from input on screen
   cityNameEl.value = "";
+  APIBuilder(cityName);
+};
 
+const APIBuilder = function(cityName){
   const currentWeatherApiUrl =
     "http://api.openweathermap.org/data/2.5/weather?q=" +
     cityName +
@@ -87,10 +91,10 @@ const oneCallWeatherHandler = function () {
 const fiveDayElHandler = function(fiveDayData) {
   fiveDayEl.innerHTML = ""
   for (let i=1; i<6; i++){
-    let newDate = new Date(fiveDayData[i].dt*1000)
+    let newDate = new Date(fiveDayData[i].dt*1000).toLocaleDateString("en-US")
     let newDiv = document.createElement("div");
     newDiv.classList.add("col-lg-2")
-    let newEl = `<div class="card" style="width: 18rem;">
+    let newEl = `<div class="card">
         <img src="http://openweathermap.org/img/wn/${fiveDayData[i].weather[0].icon}@2x.png" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">${newDate}</h5>
@@ -138,6 +142,7 @@ const cityButtonFactory = function (cityName) {
   //set text onto button created
   citySearchHistoryEl.innerText = cityName;
   cityHistoryColumnEl.appendChild(citySearchHistoryEl);
+  citySearchHistoryEl.addEventListener("click", () => APIBuilder(cityName));
 };
 
 /////     Load search history on page load     /////
@@ -145,8 +150,9 @@ const loadSearchHistory = function () {
   const loadCityHistory = localStorage.getItem("cityHistory");
   const parsedCityHistory = JSON.parse(loadCityHistory);
   console.log(parsedCityHistory);
+  if (parsedCityHistory){
   parsedCityHistory.forEach(cityButtonFactory);
-  parsedCityHistory.forEach(saveCity);
+  }
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////
