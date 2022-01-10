@@ -1,0 +1,14 @@
+header {
+    height: 100px;
+    background-color: #1E90FF; /*in case the browser doesn't support gradients*/
+    background-image: linear-gradient(to right, #1E90FF, #0000CD);
+    font-size: 36px;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    padding-top: 20px;
+  }
+
+#currentCityWeather {
+border: 1px solid black;
+}

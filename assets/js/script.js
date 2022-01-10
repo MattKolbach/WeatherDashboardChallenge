@@ -21,6 +21,7 @@ const getCurrentWeatherHandler = function (event) {
 };
 
 const APIBuilder = function(cityName){
+  currentCityweatherEl.innerHTML = "";
   const currentWeatherApiUrl =
     "http://api.openweathermap.org/data/2.5/weather?q=" +
     cityName +
