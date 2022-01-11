@@ -9,6 +9,6 @@ header {
     padding-top: 20px;
   }
 
-#currentCityWeather {
+.cityBorder {
 border: 1px solid black;
 }

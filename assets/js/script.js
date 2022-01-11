@@ -94,7 +94,7 @@ const fiveDayElHandler = function(fiveDayData) {
   for (let i=1; i<6; i++){
     let newDate = new Date(fiveDayData[i].dt*1000).toLocaleDateString("en-US")
     let newDiv = document.createElement("div");
-    newDiv.classList.add("col-lg-2")
+    newDiv.classList.add("col-lg")
     let newEl = `<div class="card">
         <img src="http://openweathermap.org/img/wn/${fiveDayData[i].weather[0].icon}@2x.png" class="card-img-top" alt="...">
         <div class="card-body">
