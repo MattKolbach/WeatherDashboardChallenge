@@ -3,7 +3,7 @@ const citySearchButton = document.querySelector("#userCityButton");
 const cityNameEl = document.querySelector("#userCityInput");
 let citySearchHistory = JSON.parse(localStorage.getItem("cityHistory")) || [];
 const cityHistoryColumnEl = document.querySelector("#cityHistory");
-const currentCityweatherEl = document.getElementById("currentCityweather");
+const currentCityWeatherEl = document.getElementById("currentCityweather");
 let today = new Date().toLocaleDateString();
 let currentCityLat;
 let currentCityLon;
@@ -13,7 +13,7 @@ const fiveDayEl = document.querySelector("#fiveDay");
 
 //////////     first API call     //////////
 const getCurrentWeatherHandler = function (event) {
-  currentCityweatherEl.innerHTML = "";
+  currentCityWeatherEl.innerHTML = "";
   const cityName = cityNameEl.value.trim();
   //clear old content from input on screen
   cityNameEl.value = "";
@@ -21,7 +21,7 @@ const getCurrentWeatherHandler = function (event) {
 };
 
 const APIBuilder = function(cityName){
-  currentCityweatherEl.innerHTML = "";
+  currentCityWeatherEl.innerHTML = "";
   const currentWeatherApiUrl =
     "http://api.openweathermap.org/data/2.5/weather?q=" +
     cityName +
@@ -46,7 +46,7 @@ const APIBuilder = function(cityName){
         currentCityHumidity.textContent = `Humidity: ${data.main.humidity} %`;
         currentCityWind.textContent = `Wind: ${data.wind.speed} MPH`;
 
-        currentCityweatherEl.append(
+        currentCityWeatherEl.append(
           currentCityName,
           currentCityTemp,
           currentCityHumidity,
@@ -83,7 +83,7 @@ const oneCallWeatherHandler = function () {
       const currentCityUvi = document.createElement("p");
 
       currentCityUvi.textContent = `UVI: ${data.current.uvi}`;
-      currentCityweatherEl.append(currentCityUvi);
+      currentCityWeatherEl.append(currentCityUvi);
       fiveDayElHandler(data.daily);
     });
   });
@@ -139,7 +139,7 @@ const cityButtonFactory = function (cityName) {
   //add type
   citySearchHistoryEl.type = "button";
   //give it a class name
-  citySearchHistoryEl.className = "btn btn-secondary";
+  citySearchHistoryEl.className = "btn btn-secondary btnMargin";
   //set text onto button created
   citySearchHistoryEl.innerText = cityName;
   cityHistoryColumnEl.appendChild(citySearchHistoryEl);

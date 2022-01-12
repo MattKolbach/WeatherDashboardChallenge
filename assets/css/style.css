@@ -12,3 +12,11 @@ header {
 .cityBorder {
 border: 1px solid black;
 }
+.btnMargin {
+  margin: 2px;
+  width: 100%;
+}
+
+.width {
+  width: 100%;
+}
