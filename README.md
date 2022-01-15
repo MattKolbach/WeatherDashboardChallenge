@@ -11,4 +11,5 @@ Challenge 6, Weather Dashboard
 https://mattkolbach.github.io/WeatherDashboardChallenge/
 
 #### Preview
+![image](https://user-images.githubusercontent.com/94270439/149637562-177eb87c-6775-48ef-b945-d96a287896e2.png)
 
