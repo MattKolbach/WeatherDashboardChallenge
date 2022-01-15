@@ -82,6 +82,13 @@ const oneCallWeatherHandler = function () {
       console.log(data);
       const currentCityUvi = document.createElement("p");
 
+      if (data.current.uvi < 3){
+        currentCityUvi.classList.add("uvLow");
+      } else if (data.current.uvi > 2 && data.current.uvi < 8) {
+        currentCityUvi.classList.add("uvMed");
+      } else {
+        currentCityUvi.classList.add("uvHigh");
+      }
       currentCityUvi.textContent = `UVI: ${data.current.uvi}`;
       currentCityWeatherEl.append(currentCityUvi);
       fiveDayElHandler(data.daily);

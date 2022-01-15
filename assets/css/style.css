@@ -20,3 +20,18 @@ border: 1px solid black;
 .width {
   width: 100%;
 }
+
+.uvLow {
+  color: rgb(0, 177, 0);
+  font-weight: 900;
+}
+
+.uvMed {
+  color: orange;
+  font-weight: 900;
+}
+
+.uvHigh {
+  color: red;
+  font-weight: 900;
+}
